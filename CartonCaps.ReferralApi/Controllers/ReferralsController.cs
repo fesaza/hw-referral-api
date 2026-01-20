@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations;
 using CartonCaps.ReferralApi.DTOs;
 using CartonCaps.ReferralApi.Models;
 using CartonCaps.ReferralApi.Services;
@@ -195,13 +194,4 @@ public class ReferralsController : ControllerBase
 
         return null;
     }
-}
-
-public class CompleteReferralRequest
-{
-    /// <summary>
-    /// The ID of the user who completed the referral (the referee).
-    /// </summary>
-    [Required]
-    public Guid RefereeUserId { get; set; }
 }

@@ -2,10 +2,6 @@ using CartonCaps.ReferralApi.Models;
 
 namespace CartonCaps.ReferralApi.DTOs;
 
-/// <summary>
-/// Detailed response model for referral data, including referrer information.
-/// Used when looking up a referral by code (e.g., for deep linking).
-/// </summary>
 public class ReferralDetailsResponse
 {
     /// <summary>
@@ -35,6 +31,7 @@ public class ReferralDetailsResponse
 
     /// <summary>
     /// Indicates whether this referral is still valid and can be used.
+    /// We can also throw exceptions instead of returning this flag to avoid the UI processing invalid referrals.
     /// </summary>
     public bool IsValid { get; set; }
 }
