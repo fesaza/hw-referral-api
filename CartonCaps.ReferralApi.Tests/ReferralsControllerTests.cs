@@ -1,5 +1,6 @@
 using System.Net;
 using System.Net.Http.Json;
+using System.Threading;
 using CartonCaps.ReferralApi;
 using CartonCaps.ReferralApi.Data;
 using CartonCaps.ReferralApi.DTOs;
@@ -13,8 +14,11 @@ namespace CartonCaps.ReferralApi.Tests;
 public class ReferralsControllerTests(WebApplicationFactory<Program> factory)
     : IClassFixture<WebApplicationFactory<Program>>
 {
+    private static int _testCounter = 0;
+
     private HttpClient CreateClient()
     {
+        var testId = Interlocked.Increment(ref _testCounter);
         return factory.WithWebHostBuilder(builder =>
         {
             builder.ConfigureServices(services =>
@@ -28,9 +32,10 @@ public class ReferralsControllerTests(WebApplicationFactory<Program> factory)
                 }
 
                 // Add a new InMemory database for each test
+                // Use a unique name per test to ensure isolation
                 services.AddDbContext<ReferralDbContext>(options =>
                 {
-                    options.UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString());
+                    options.UseInMemoryDatabase(databaseName: $"TestDb_{testId}");
                 });
             });
         }).CreateClient();

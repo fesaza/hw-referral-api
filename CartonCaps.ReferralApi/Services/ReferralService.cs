@@ -17,7 +17,7 @@ public class ReferralService : IReferralService
     public ReferralService(ReferralDbContext context)
     {
         _context = context;
-        InitializeMockData();
+        InitializeMockDataIfNeeded();
     }
 
     public async Task<List<Referral>> GetUserReferralsAsync(Guid userId)
@@ -185,7 +185,7 @@ public class ReferralService : IReferralService
         return $"https://cartoncaps.app/refer/{referralCode}";
     }
 
-    private void InitializeMockData()
+    private void InitializeMockDataIfNeeded()
     {
         // Only initialize if database is empty
         if (_context.Referrals.Any() || _context.Users.Any())

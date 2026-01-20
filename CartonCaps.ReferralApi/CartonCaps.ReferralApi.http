@@ -1,6 +1,56 @@
 @CartonCaps.ReferralApi_HostAddress = http://localhost:5286
+@UserId = 12345678-1234-1234-1234-123456789012
 
-GET {{CartonCaps.ReferralApi_HostAddress}}/weatherforecast/
+### Get all referrals for the current user
+GET {{CartonCaps.ReferralApi_HostAddress}}/api/referrals
 Accept: application/json
+X-User-Id: {{UserId}}
+
+###
+
+### Get a specific referral by ID
+GET {{CartonCaps.ReferralApi_HostAddress}}/api/referrals/00000000-0000-0000-0000-000000000000
+Accept: application/json
+X-User-Id: {{UserId}}
+
+###
+
+### Get referral details by referral code
+GET {{CartonCaps.ReferralApi_HostAddress}}/api/referrals/code/ABC123
+Accept: application/json
+
+###
+
+### Create a new referral
+POST {{CartonCaps.ReferralApi_HostAddress}}/api/referrals
+Content-Type: application/json
+X-User-Id: {{UserId}}
+
+{
+  "refereeEmail": "friend@example.com"
+}
+
+###
+
+### Get referral statistics for the current user
+GET {{CartonCaps.ReferralApi_HostAddress}}/api/referrals/stats
+Accept: application/json
+X-User-Id: {{UserId}}
+
+###
+
+### Mark a referral as installed
+POST {{CartonCaps.ReferralApi_HostAddress}}/api/referrals/code/ABC123/installed
+Accept: application/json
+
+###
+
+### Mark a referral as completed
+POST {{CartonCaps.ReferralApi_HostAddress}}/api/referrals/code/ABC123/completed
+Content-Type: application/json
+
+{
+  "refereeUserId": "87654321-4321-4321-4321-210987654321"
+}
 
 ###
